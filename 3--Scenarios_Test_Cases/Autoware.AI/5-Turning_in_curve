@@ -1,0 +1,39 @@
+from environs import Env
+import copy
+import lgsvl
+import time
+import os
+
+print("NPC waiting EGO gets closer")
+
+env = Env()
+
+LGSVL__SIMULATOR_HOST = env.str("LGSVL__SIMULATOR_HOST", "127.0.0.1")
+LGSVL__SIMULATOR_PORT = env.int("LGSVL__SIMULATOR_PORT", 8181)
+LGSVL__AUTOPILOT_0_HOST = env.str("LGSVL__AUTOPILOT_0_HOST", "127.0.0.1")
+LGSVL__AUTOPILOT_0_PORT = env.int("LGSVL__AUTOPILOT_0_PORT", 9090)
+
+sim = lgsvl.Simulator(LGSVL__SIMULATOR_HOST, LGSVL__SIMULATOR_PORT)
+sim.load(env.str("LGSVL__MAP"))
+
+spawns = sim.get_spawn()
+forward = lgsvl.utils.transform_to_forward(spawns[0])
+right = lgsvl.utils.transform_to_right(spawns[0])
+
+
+ego_state = lgsvl.AgentState()
+ego_state.transform = spawns[0]
+ego_state.transform.position = lgsvl.Vector(-16, 0, 50)
+ego_state.transform.rotation.y =  90
+
+
+ego = sim.add_agent(env.str("LGSVL__VEHICLE_0"), lgsvl.AgentType.EGO, ego_state)
+ego.connect_bridge(env.str("LGSVL__AUTOPILOT_0_HOST", lgsvl.wise.SimulatorSettings.bridge_host), env.int("LGSVL__AUTOPILOT_0_PORT", lgsvl.wise.SimulatorSettings.bridge_port))
+print("Waiting for connection...")
+while not ego.bridge_connected:
+    time.sleep(1)
+
+print("Bridge connected:", ego.bridge_connected)
+
+
+sim.run(0)

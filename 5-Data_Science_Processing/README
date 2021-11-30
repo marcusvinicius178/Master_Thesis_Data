@@ -1,0 +1,13 @@
+The codes used to process the data (conversion data types, equations, outliers removing, plot, etc) is available inside the folder "Plot_codes_Benchmark_Parameters". The codes are actually located in the subfolders of this directory:
+
+A - Auxiliary_code_Benchmark: Contain the auxiliary modules that need to be called for the main modules (located under "Main_codes_Benchmark" folder). Without these codes it is not possible to run the main modules. The main modules need these "sub-modules". The codes available in this module also need the bag data from the rosbag. The rosbags (New_Freespace_Astar_No_collision.bag, new_freespace_Latttice_test2.bag, open_planner_global_local.bag)  are not available in this gitrepository because of its size. 
+
+*Just contact me if you wish to get these bag for testing, improving the code or something else: email: marcus.posgrad.ufsc@gmail.com
+
+B - Auxiliary_CSV_Files: Are important CSV files extracted from Autoware topics and from Apollo channels that are needed and feed the main modules or the submodules. They are required to plot the data. 
+
+C - Bakcup_old_test_codes: Just a backup from my attempts that I have done to reach the correct codes present in the "Main_codes_Benchmark"
+
+D- Main_codes_Benchmark: This folder contains all the most important codes to process the data and give it value! In these codes the plotted data were generated, as well as the code to plot it.
+
+

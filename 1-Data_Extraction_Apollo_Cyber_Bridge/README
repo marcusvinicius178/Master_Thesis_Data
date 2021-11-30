@@ -1,0 +1,22 @@
+1:The code for the extraction of cyber channels ( similar to ROS topics) is available inside the folder "channels_data_extraction"
+
+2:The python file able to extract ALL the channels data is "get_cyber_channels_data".
+obs: This code is interactive, it allows the user input to select the TYPE OF PLANNER to be tested and the TEST-CASE desired in order to save the data in different folders created with the respective planner-name and test-case number. For the master thesis simulation it was just possible to
+test the planner: Public_Road and the static truck test-case....
+
+3: To get the data, you must run the following codes to get this data (inside the Docker image)
+
+Inside the python module (from Apollo.Auto repository)
+A)  bazel build cyber/python:all
+
+After build the python modules run inside the "home" folder of Docker image (after BUILD and ENTER the image):
+
+B)./bazel-bin/cyber/python/cyber_py3/channels_data_extraction:get_cyber_channels_data
+
+Ok now you should have generated a .csv file with all the extracted Data (of course you must open a parallel terminal and enter the same image of the running simulation to get this data). 
+
+More details of Data extraction can be read inside the document: "Tutorial_channels_data_Extraction" found inside the folder "channels_data_extraction". You can also check for more details in the official documentation from Apollo.Auto repository: https://github.com/ApolloAuto/apollo and their git support: https://github.com/ApolloAuto/apollo/issues
+
+
+4) The RAW extracted data, csv files from APOLLO.AUTO Channels, USED to plot the trip data are available at the folder "CSV_extracted_DATA".
+Good Lucky!

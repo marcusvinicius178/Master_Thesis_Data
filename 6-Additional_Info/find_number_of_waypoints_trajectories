@@ -1,0 +1,31 @@
+Get the number of waypoints for each planner:
+
+In code "Op_Plot_Deviation_xyz_with_CLASSES.py
+
+
+#ASTAR
+
+Astar_df_pose_orientation_final_wp['field.waypoints107.wpstate.aid']
+
+If above condition returns true or false until find the number of waypoints
+in case of AStar there is 107 points to create the trajectory
+
+FREESPACE_ASTAR = 107 WAYPOINTS
+
+#OPEN PLANNER
+Op_df_pose_orientation_final_wp['field.waypoints192.wpstate.aid']
+OPEN_PLANNER = 192 WAYPOINTS
+
+#LATTICE
+Lattice_calculate_waypoints['field.waypoints106.wpstate.aid']
+
+FREESPACE_LATTICE = 106 WAYPOINTS
+
+
+#APOLLO
+
+UNTIL THE ROW 261 IS GIVEN DATA FOR X,Y PATH
+THE DATA BEGIN TO FLOW IN ROW 53
+THEREFORE APOLLO GENERATES 261-53 = 208 WAYPOINTS
+
+FOR THIS REASON IT IS THE SMOOTHER BECAUSE CALCULATE MORE WAYPOINTS

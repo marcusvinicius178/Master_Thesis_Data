@@ -1,0 +1,67 @@
+Notes of ROSBAG commands (USAGE TUTORIAL):
+
+used bag in shared-dir = tests_bag.bag
+
+1- $rosbag record --duration=30 /odom |This test bag size is about 217,5 kb (pretty small)
+ - Recording 30 seconds of this simulation, the bag took 272 lines of the odometry topic
+ 
+2 - Testing bag compression: 
+ $rosbag compress tests_bag.bag 
+The size was reduced from 217,5 kb to 20,1 kb 
+This is a good command to execute after extract the desired data from each simulation (test-case) for better storage space.
+After use it, it maintains the original and create a backup with the name:
+tests_bag.orig.bag file
+
+The most nice is that the first commandt to extract the data still works with the compressed bag! All the 273 lines of /odom topic was obtained with sucess after use the compressed bag.
+
+rostopic echo -b tests_bag.bag /odom -p > new_dometry_test_data.csv
+
+
+Notice that the tests_bag.bag now is the name of the compressed bag and not from the original one anymore...
+
+3- $rosbag info tests_bag.bag
+The command above return interesting info from the bag, including the recorded topics and number of its messages. This is a good command to understand which topic has and which does not have the recorded message...before to transfer the data to csv or .txt in order to no losing time.
+
+
+4- Testing record less amount of data with the ROSBAG commands:
+
+A) $rosbag record -O test_size_bag.bag --duration=30 -b 612 /odom
+B) $rosbag record -O test_size2_bag.bag --duration=30 --chunksize=612 /odom 
+
+It does not work....it records in the same frequency
+
+
+
+5- Record the data for a specific period of time:
+A- https://get-help.robotigniteacademy.com/t/rosbag-rqt-visualization/9468/3
+
+$ rosbag record --duration= 2m -O /path/name_of_the_bag.bag /odom/planning/vel/pose 
+
+
+To record all topics from a desired path:
+$ rosbag record -O /path/ -a
+
+
+
+6-To listen the data from some bag topic, the recorded bag it must be used:
+$rostopic echo -b name_of_the_bag.bag -p /topic
+For example if you wish to list the recorded data from Odometry:
+
+$rostopic echo -b name_of_the_bag.bag -p /odom
+$rostopic echo -b name_of_the_bag.bag -p /vel
+$rostopic echo -b name_of_the_bag.bag -p /pose
+etc
+
+7-To transfer the extracted data from a specific topic to a .csv or .txt file, it must be used: 
+
+
+$ rostopic echo -b name_of_the_bag.bag -p /odom > odometry_data.csv
+$ rostopic echo -b name_of_the_bag.bag -p /planning > planning_data.csv
+$ rostopic echo -b name_of_the_bag.bag -p /pose > position_data.csv
+
+
+
+
+
+
+

@@ -1,0 +1,48 @@
+from environs import Env
+import lgsvl
+import time
+
+env = Env()
+
+LGSVL__SIMULATOR_HOST = env.str("LGSVL__SIMULATOR_HOST", "127.0.0.1")
+LGSVL__SIMULATOR_PORT = env.int("LGSVL__SIMULATOR_PORT", 8181)
+LGSVL__AUTOPILOT_0_HOST = env.str("LGSVL__AUTOPILOT_0_HOST", "127.0.0.1")
+LGSVL__AUTOPILOT_0_PORT = env.int("LGSVL__AUTOPILOT_0_PORT", 9090)
+
+sim = lgsvl.Simulator(LGSVL__SIMULATOR_HOST, LGSVL__SIMULATOR_PORT)
+sim.load(env.str("LGSVL__MAP"))
+
+
+spawns = sim.get_spawn()
+egoState = lgsvl.AgentState()
+
+egoState.transform = spawns[0]
+forward = lgsvl.utils.transform_to_forward(spawns[0])
+right = lgsvl.utils.transform_to_right(spawns[0])
+egoState.transform.position = spawns[0].position + (-5 * forward) + (0.85 * right)  # 5m forwards
+egoState.transform.rotation.y = 180
+
+
+ego = sim.add_agent(env.str("LGSVL__VEHICLE_0"), lgsvl.AgentType.EGO, egoState)
+ego.connect_bridge(env.str("LGSVL__AUTOPILOT_0_HOST", lgsvl.wise.SimulatorSettings.bridge_host), env.int("LGSVL__AUTOPILOT_0_PORT", lgsvl.wise.SimulatorSettings.bridge_port))
+print("Waiting for connection...")
+
+print("Current time = ", sim.current_time)
+print("Current frame = ", sim.current_frame)
+while not ego.bridge_connected:
+    time.sleep(1)
+
+print("Bridge connected:", ego.bridge_connected)
+
+i = 2
+state = lgsvl.AgentState()
+state.transform.position = spawns[0].position + (40 * forward)  + (0.75 * right)
+state.transform.rotation.y = 180
+#pedestrian = sim.add_agent("Bob", lgsvl.AgentType.PEDESTRIAN, state)
+npc = sim.add_agent("BoxTruck", lgsvl.AgentType.NPC, state)
+
+#sensors = ego.get_sensors()
+#for s in sensors:
+ #   print(type(s), s.enabled)
+ 
+sim.run(0) 

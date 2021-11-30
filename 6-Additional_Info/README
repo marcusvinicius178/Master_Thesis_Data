@@ -1,0 +1,14 @@
+This folder contain just additional data, or I would say, Conclusions that I was having and taking notes while plotting data, or writing the master thesis...It is not synchronized or in a cronological order...almost all the notes are in portuguese (cause I am brazilian).
+But a translator can help you understand. I would highlight the following data:
+
+A - Potência_Calculo - In this file I have summarized the main steps to calculate how much Power (Hp) each trajectory planner consumes. The power consequently will influence in the fuel consumption...
+
+B - Tópicos_BAG_plotar_ou_nao: I have summarized the meaning of each Autoware topic, and highlighted the ones that makes sense to extract and plot
+
+C - ROSGRAPH Planners Interpretation + RORSBAG_Planner.jpeg = These files describe and show respectivelly how the trajectory planner generates the path, for each Autoware planner.
+
+There are other files here too, that if you wish to know the meaning of just send me an e-mail:
+
+marcus.posgrad.ufsc@gmail.com
+
+I will be glad in explain!

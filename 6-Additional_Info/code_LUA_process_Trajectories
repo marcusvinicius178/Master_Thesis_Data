@@ -1,0 +1,43 @@
+--APOLLO
+--stanrdize relative waypoints x,y
+--x0 = first waypoint in x for Apollo/Autoware
+--y0 = first waypoint in y for Apollo/Autoware
+
+x0 = 592764,118656158
+y0 = 4134483
+x = v1 - x0
+y = v2 - y0
+
+return -(v1-x0),-(v2-y0)
+
+--AUTOWARE.AI - Open_Planner
+--stanrdize relative waypoints x,y
+--x0 = first waypoint in x for Apollo/Autoware
+--y0 = first waypoint in y for Apollo/Autoware
+
+x0 = 44.98925
+y0 = 4.837127
+
+
+return -(v1-x0),-(v2-y0)
+
+
+--AUTOWARE.AI - Freespace_Astar
+
+
+x0 = 43,5970127861
+y0 = 4,03805961884
+
+
+return -(v1-x0),-(v2-y0)
+
+
+--AUTOWARE.AI - Freespace_Lattice
+
+x0 = 43,6066970702
+y0 = 4,04481943798
+
+
+return -(v1-x0),-(v2-y0)
+
+

@@ -1,0 +1,20 @@
+The extraction from the bridge data, between LGSVL simulator and ROS topics, were done using the ROSBAG useful commands!
+Two approaches were used:
+
+1 - Extract Data directly from the recorded .bag data
+
+The commands to do this are outline in the "ROSBAG_Commands"
+The most applied commands to tranfer specific topic data to a .csv or .txt file are written in topic number 7 of this document.
+
+
+2 - Extract data from the rosbag using Python code, from an IDLE ( I used Spyder):
+This approach was better to also threat the data, process data, or do a Data Science of this data (as it is preferred)
+
+A) The data from specific topics, such as odometry, were extracted and stored in a list. 
+B)Then this data is processed in this code. For example I needed to convert the ROS Orientation data that comes in quaternion to roll, pitch and yaw, in order to get the vehicle heading angle, while it was following the trajectory.
+C) Finally these processed lists are converted to DATAFRAMES, which is a better format to import and plot the data in a further process codes...
+
+This approach codes are available and begin with prefix "2_A", "2_B"...I have used numerous auxiliar codes such as this to process ROS data...and I making some of them available in this folder...
+
+
+3- Some of The RAW extracted data, csv files from ROSBAG topics, USED to plot the trip data are available at the folder "CSV_extracted_DATA".
